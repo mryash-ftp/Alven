@@ -1,4 +1,4 @@
-# 🚀 My Personal Portfolio - Zerox Center Web
+# 🚀 My Personal Portfolio 
 
 Welcome to my professional portfolio repository! This project is a reflection of my skills in web development and my eye for clean, functional design.
 
