@@ -3,978 +3,419 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alven Alex</title>
-    <!-- Poppins & Inter font mix -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font awesome 6 (free) icons -->
+    <title>Alven Alex | Building Future</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ---------- LIGHT THEME (default) ---------- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #030816;
+            --card: rgba(255, 255, 255, 0.03);
+            --text: #e2e8f0;
+            --accent: #00f2ff;
+            --accent-2: #ff00c8;
+            --border: rgba(255, 255, 255, 0.08);
+            --glass: blur(12px);
+            --progress-bg: rgba(255, 255, 255, 0.1);
         }
 
-        body {
-            background-color: #f6f9fc;
-            font-family: 'Inter', sans-serif;
-            color: #11212e;
+        .light-theme {
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #0f172a;
+            --accent: #0891b2;
+            --accent-2: #be185d;
+            --border: #e2e8f0;
+            --progress-bg: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
             line-height: 1.6;
-            scroll-behavior: smooth;
-            transition: background-color 0.2s ease, color 0.2s ease;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
 
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 30px;
-        }
-
-        /* header & nav */
-        header {
-            background: white;
-            box-shadow: 0 10px 30px -10px rgba(0,20,30,0.08);
-            position: sticky;
-            top: 0;
-            z-index: 99;
-            backdrop-filter: blur(6px);
-            background: rgba(255,255,255,0.85);
-            transition: background 0.2s, backdrop-filter 0.2s, box-shadow 0.2s;
-        }
-
+        /* Navbar */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 0;
-            flex-wrap: wrap;
+            padding: 1.5rem 0;
+            margin-bottom: 4rem;
         }
 
-        .logo {
-            font-size: 1.9rem;
-            font-weight: 800;
-            color: #0a2c3d;
-            transition: color 0.2s;
-        }
-        .logo span {
-            color: #006a8e;
-            font-weight: 300;
-            margin-left: 6px;
-            letter-spacing: -0.5px;
-        }
-        .logo .real-small {
-            display: block;
-            font-size: 0.7rem;
-            font-weight: 400;
-            color: #4a6f7c;
-            letter-spacing: 2px;
+        .logo { 
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800; 
+            font-size: 1.5rem; 
             text-transform: uppercase;
-            margin-top: -6px;
+            letter-spacing: -1px;
         }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-        }
+        .logo span { color: var(--accent); text-shadow: 0 0 15px var(--accent); }
 
-        .nav-links a {
+        .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+        
+        .nav-right a {
             text-decoration: none;
-            margin-left: 32px;
-            color: #1f4a5c;
-            font-weight: 500;
-            transition: 0.2s;
-            font-size: 1.05rem;
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0.7;
+            transition: 0.3s;
         }
-        .nav-links a:hover {
-            color: #002c3b;
-            border-bottom: 2px solid #0093b2;
-            padding-bottom: 6px;
-        }
+        .nav-right a:hover { opacity: 1; color: var(--accent); }
 
-        /* ---------- THEME TOGGLE BUTTON ---------- */
         .theme-toggle {
-            background: transparent;
-            border: none;
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 45px; height: 45px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 1.6rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #1f5e6b;
-            transition: 0.2s;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: rgba(0, 120, 140, 0.08);
-        }
-        .theme-toggle:hover {
-            background: rgba(0, 120, 140, 0.2);
-            transform: scale(1.05);
-        }
-        .light-icon, .dark-icon {
-            transition: 0.15s;
-        }
-        .dark-icon {
-            display: none;
+            display: flex; align-items: center; justify-content: center;
+            transition: 0.3s;
         }
 
-        /* hero section */
-        .hero {
+        .theme-toggle:hover { border-color: var(--accent); transform: rotate(15deg); }
+
+        /* Hero Section */
+        .hero { margin-bottom: 5rem; }
+        
+        .hero-wrapper {
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            padding: 50px 0 40px;
+            gap: 3rem;
         }
 
-        .hero-text {
-            flex: 1 1 350px;
-        }
-        .hero-text .greet {
-            font-size: 1.2rem;
-            color: #006a8e;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-        }
-        .hero-text h1 {
-            font-size: 3.2rem;
-            font-weight: 800;
-            line-height: 1.15;
-            margin: 15px 0 10px;
-            color: #0b2d39;
-        }
-        .hero-text h1 span {
-            background: linear-gradient(145deg, #005f73, #0a3a44);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .alias-badge {
-            background: #e6f1f5;
-            display: inline-block;
-            padding: 8px 22px;
-            border-radius: 40px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #00505e;
-            margin: 12px 0 18px;
-            border-left: 5px solid #0092ac;
-        }
-        .alias-badge i {
-            margin-right: 8px;
-            color: #00748b;
+        .hero-text { flex: 1; }
+
+        .hero h1 { 
+            font-size: clamp(2.5rem, 6vw, 3.5rem); 
+            margin-bottom: 1rem; 
+            letter-spacing: -2px; 
+            line-height: 1.1;
+            font-family: 'Poppins', sans-serif;
         }
 
-        .hero-desc {
-            font-size: 1.2rem;
-            color: #2e4c5c;
-            max-width: 600px;
-            margin-bottom: 30px;
-            font-weight: 400;
+        .highlight { color: var(--accent-2); text-shadow: 0 0 20px rgba(255, 0, 200, 0.3); }
+
+        .subhead { font-size: 1rem; opacity: 0.6; margin-bottom: 1.5rem; font-weight: 600; letter-spacing: 1px; }
+
+        .tagline { 
+            font-size: 1.1rem; 
+            opacity: 0.8; 
+            max-width: 600px; 
+            border-left: 3px solid var(--accent);
+            padding-left: 1.5rem;
         }
 
-        .btn-group {
-            display: flex;
-            gap: 18px;
-            flex-wrap: wrap;
-        }
-        .btn {
-            padding: 14px 34px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.2s;
-            display: inline-block;
-            border: 1.5px solid transparent;
-        }
-        .btn-primary {
-            background: #0f4b5c;
-            color: white;
-            box-shadow: 0 6px 14px rgba(1, 80, 96, 0.25);
-        }
-        .btn-primary:hover {
-            background: #003543;
-            transform: translateY(-4px);
-        }
-        .btn-outline {
-            background: transparent;
-            border-color: #0f4b5c;
-            color: #0f4b5c;
-        }
-        .btn-outline:hover {
-            background: #ebf5f7;
-            border-color: #004856;
-        }
-
-        /* IMAGE CONTENT */
-        .hero-image {
+        /* Profile Image Blob Style */
+        .hero-image-container {
             flex: 0 0 300px;
-            margin: 20px auto;
             position: relative;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
         .img-frame {
-            background: #d9e9f0;
             width: 280px;
             height: 280px;
             border-radius: 30% 70% 70% 30% / 30% 35% 65% 70%;
-            background: linear-gradient(145deg, #cbdce3, #b1cdd9);
+            background: linear-gradient(145deg, var(--accent), var(--accent-2));
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 25px 35px -8px rgba(0,80,90,0.2);
-            border: 4px solid white;
-            transition: 0.3s ease;
+            padding: 4px;
+            box-shadow: 0 25px 50px -12px rgba(0, 242, 255, 0.3);
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
         }
+
         .img-frame:hover {
             border-radius: 60% 40% 40% 60% / 40% 50% 50% 60%;
+            transform: scale(1.05) rotate(-2deg);
         }
+
         .img-frame img {
-            width: 94%;
-            height: 94%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             border-radius: inherit;
-            box-shadow: 0 0 0 3px white;
-        }
-        .img-caption {
-            margin-top: 12px;
-            font-weight: 500;
-            color: #0e4c59;
-            background: rgba(255,255,255,0.5);
-            padding: 6px 18px;
-            border-radius: 40px;
-            font-size: 0.95rem;
-            display: inline-block;
-            backdrop-filter: blur(2px);
+            border: 3px solid var(--bg);
         }
 
-        /* section general */
-        section {
-            padding: 70px 0;
-        }
-
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #09343e;
-            position: relative;
-            display: inline-block;
-        }
-        .section-title:after {
-            content: '';
+        .glow-circle {
             position: absolute;
-            bottom: -12px;
-            left: 0;
-            width: 70px;
-            height: 5px;
-            background: #0096b0;
-            border-radius: 6px;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(0, 242, 255, 0.15) 0%, transparent 70%);
+            z-index: 1;
+            pointer-events: none;
         }
 
-        /* expertise cards */
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
-            margin-top: 50px;
-        }
-        .card {
-            background: white;
-            padding: 38px 22px;
-            border-radius: 30px;
-            box-shadow: 0 10px 25px -8px rgba(0,60,70,0.06);
-            transition: 0.15s;
-            border: 1px solid #e4f0f3;
-            text-align: center;
-        }
-        .card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 30px 40px -12px rgba(1,75,90,0.2);
-            border-color: #b9dde5;
-        }
-        .card i {
-            font-size: 2.8rem;
-            color: #006077;
-            margin-bottom: 22px;
-        }
-        .card h3 {
-            font-size: 1.7rem;
-            margin-bottom: 12px;
-            color: #002b36;
-        }
-
-        .badge-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            margin-top: 25px;
-        }
-        .badge {
-            background: #e0f0f4;
-            padding: 5px 16px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #0a4957;
-        }
-
-        .identity-highlight {
-            background: #f0f7fa;
-            border-radius: 50px;
-            padding: 30px 35px;
-            margin: 50px 0 20px;
-            border-left: 10px solid #007a93;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .identity-highlight h4 {
-            font-size: 1.7rem;
-            font-weight: 600;
-            color: #103f49;
-        }
-
-        /* projects grid */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        .project-item {
-            background: white;
-            border-radius: 24px;
-            padding: 28px 22px;
-            box-shadow: 0 6px 18px rgba(0,60,70,0.04);
-            transition: all 0.2s;
-            border-bottom: 4px solid transparent;
-        }
-        .project-item:hover {
-            border-bottom-color: #008aa2;
-            background: #fcfefe;
-        }
-        .project-item i {
-            font-size: 2.2rem;
-            color: #00778b;
-            margin-bottom: 16px;
-        }
-        .project-tag {
-            background: #def0f3;
-            padding: 4px 12px;
-            border-radius: 50px;
-            display: inline-block;
-            margin: 12px 0 8px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #005666;
-        }
-
-        .extra-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-top: 50px;
-            background: #ebf3f5;
-            padding: 40px 35px;
-            border-radius: 60px 20px 60px 20px;
-            transition: background 0.2s;
-        }
-        .extra-col {
-            flex: 1 1 220px;
-        }
-        .extra-col i {
-            font-size: 2.2rem;
-            color: #005f6b;
-            margin-bottom: 12px;
-        }
-
-        /* contact / footer */
-        .contact-area {
-            background: #0e404c;
-            color: white;
-            border-radius: 60px 60px 30px 30px;
-            padding: 60px 40px;
-            margin-top: 40px;
-            transition: background 0.2s;
-        }
-        .contact-flex {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .social-links a {
-            color: white;
-            background: #1d616e;
-            width: 48px;
-            height: 48px;
-            display: inline-flex;
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            margin-left: 12px;
+        /* Grid & Cards */
+        .section-header {
             font-size: 1.5rem;
-            transition: 0.2s;
-        }
-        .social-links a:hover {
-            background: #00a6bf;
-            transform: scale(1.1);
+            font-family: 'Poppins', sans-serif;
+            margin: 4rem 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .copyright {
+        .section-header i { color: var(--accent); }
+
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 1.5rem; 
+        }
+
+        .card { 
+            background: var(--card); 
+            border: 1px solid var(--border); 
+            padding: 2rem; 
+            border-radius: 24px; 
+            backdrop-filter: var(--glass);
+            transition: 0.4s;
+        }
+
+        .card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--accent); 
+            box-shadow: 0 20px 40px -20px rgba(0, 242, 255, 0.2);
+        }
+
+        .card i { font-size: 2rem; color: var(--accent); margin-bottom: 1.2rem; display: block; }
+        .card h3 { font-size: 1.2rem; margin-bottom: 0.8rem; }
+        .card p { font-size: 0.9rem; opacity: 0.6; }
+
+        /* Roadmap */
+        .roadmap {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .roadmap-item { width: 100%; }
+
+        .roadmap-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+
+        .roadmap-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: var(--progress-bg);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            width: 0%;
+            transition: width 1s ease-in-out;
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .contact-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 1.2rem;
+            border-radius: 20px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: 0.3s;
+        }
+
+        .contact-card:hover { border-color: var(--accent-2); background: rgba(255, 0, 200, 0.05); }
+        .contact-card i { font-size: 1.2rem; color: var(--accent-2); }
+
+        footer { 
+            margin-top: 6rem; 
+            padding: 2rem 0; 
+            border-top: 1px solid var(--border); 
+            font-size: 0.8rem; 
+            opacity: 0.6;
             text-align: center;
-            color: #164c57;
-            padding-bottom: 30px;
-        }
-        .footer-note {
-            background: white;
-            padding: 18px 25px;
-            border-radius: 60px;
-            display: inline-block;
-            color: #0d4450;
         }
 
-        /* ---------- NEON DARK THEME (black background, neon cyan/pink, glowing text) ---------- */
-        body.dark-theme {
-            background-color: #03090b;
-            color: #e0f2fe;
-        }
-        body.dark-theme header {
-            background: rgba(2, 18, 22, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-            border-bottom: 1px solid #00ffff40;
-        }
-        body.dark-theme .logo {
-            color: #ffffff;
-            text-shadow: 0 0 8px #00ffff, 0 0 12px #00cccc;
-        }
-        body.dark-theme .logo span {
-            color: #80ffff;
-            text-shadow: 0 0 6px #00cccc;
-        }
-        body.dark-theme .logo .real-small {
-            color: #b3ffff;
-            text-shadow: 0 0 4px #0099cc;
-        }
-        body.dark-theme .nav-links a {
-            color: #b3ffff;
-            text-shadow: 0 0 4px #00ccff;
-        }
-        body.dark-theme .nav-links a:hover {
-            color: #ffffff;
-            border-bottom-color: #ff66cc;
-            text-shadow: 0 0 10px #ff00cc, 0 0 4px #ff66cc;
-        }
-        body.dark-theme .theme-toggle {
-            color: #00ffff;
-            background: rgba(0, 255, 255, 0.1);
-            box-shadow: 0 0 15px #00ffff40;
-        }
-        body.dark-theme .theme-toggle:hover {
-            background: rgba(0, 255, 255, 0.25);
-            box-shadow: 0 0 22px #00ffff;
-        }
-        /* switch icons */
-        body.dark-theme .light-icon {
-            display: none;
-        }
-        body.dark-theme .dark-icon {
-            display: inline-block;
-            color: #ff99ff;
-            text-shadow: 0 0 12px #ff00cc, 0 0 6px #ff3399;
-        }
-        body.dark-theme .hero-text h1 {
-            color: #ffffff;
-            text-shadow: 0 0 12px #00ffff, 0 0 25px #0099ff;
-        }
-        body.dark-theme .hero-text h1 span {
-            background: linear-gradient(145deg, #99ffff, #ff99ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 18px #ff66cc, 0 0 8px #00ffff;
-        }
-        body.dark-theme .hero-text .greet {
-            color: #ffccff;
-            text-shadow: 0 0 10px #ff00aa, 0 0 5px #ff3399;
-        }
-        body.dark-theme .alias-badge {
-            background: #111e22;
-            color: #ccffff;
-            border-left: 5px solid #ff66cc;
-            box-shadow: 0 0 15px #ff33cc80, 0 0 5px #00ffff;
-            text-shadow: 0 0 6px #00ccff;
-        }
-        body.dark-theme .hero-desc {
-            color: #d1f2ff;
-            text-shadow: 0 0 3px #006688;
-        }
-        body.dark-theme .btn-primary {
-            background: #003d4d;
-            color: white;
-            border: 1px solid #00ffff;
-            box-shadow: 0 0 20px #00ffff, 0 6px 14px rgba(0,0,0,0.6);
-            text-shadow: 0 0 6px #004444;
-        }
-        body.dark-theme .btn-primary:hover {
-            background: #004e5e;
-            box-shadow: 0 0 28px #00ffff, 0 0 10px #ff00c8;
-            border-color: #ff99ff;
-        }
-        body.dark-theme .btn-outline {
-            border-color: #00ffff;
-            color: #ccffff;
-            text-shadow: 0 0 8px #00cccc;
-        }
-        body.dark-theme .btn-outline:hover {
-            background: #003d4d80;
-            border-color: #ff66cc;
-            box-shadow: 0 0 18px #ff33cc;
-        }
-        body.dark-theme .card,
-        body.dark-theme .project-item,
-        body.dark-theme .footer-note {
-            background: #0e1a1f;
-            border: 1px solid #00c8c840;
-            box-shadow: 0 0 25px #00ffff20, 0 10px 25px -8px black;
-            color: #e6ffff;
-        }
-        body.dark-theme .card h3,
-        body.dark-theme .project-item h4 {
-            color: #b3ffff;
-            text-shadow: 0 0 10px #00cccc, 0 0 3px #009999;
-        }
-        body.dark-theme .badge,
-        body.dark-theme .project-tag {
-            background: #0d3038;
-            color: #eaffff;
-            border: 1px solid #00ffff60;
-            box-shadow: 0 0 8px #00cc99;
-        }
-        body.dark-theme .identity-highlight {
-            background: #0b1c22;
-            border-left: 10px solid #ff66cc;
-            box-shadow: 0 0 28px #ff00aa30;
-            color: #e6f7ff;
-        }
-        body.dark-theme .identity-highlight p {
-            color: #c6f0ff !important;
-        }
-        body.dark-theme .extra-row {
-            background: #0b1c1f;
-            border: 1px solid #00ffff60;
-            box-shadow: 0 0 35px #00b3b320;
-        }
-        body.dark-theme .extra-col i,
-        body.dark-theme .card i,
-        body.dark-theme .project-item i {
-            color: #ffb3ff;
-            text-shadow: 0 0 18px #ff00cc, 0 0 8px #ff66cc;
-        }
-        body.dark-theme .section-title {
-            color: #ffffff;
-            text-shadow: 0 0 18px #00ffff, 0 0 10px #ff44aa;
-        }
-        body.dark-theme .section-title:after {
-            background: #ff66cc;
-            box-shadow: 0 0 18px #ff00aa;
-        }
-        body.dark-theme .contact-area {
-            background: #021014;
-            border: 1px solid #00ffff;
-            box-shadow: 0 0 35px #00b3b380;
-        }
-        body.dark-theme .social-links a {
-            background: #0d3a42;
-            color: #ccffff;
-            border: 1px solid #00ffff;
-            box-shadow: 0 0 15px #00ffff;
-        }
-        body.dark-theme .social-links a:hover {
-            background: #ff33cc;
-            border-color: #ffffff;
-            box-shadow: 0 0 28px #ff66ff, 0 0 12px #ff00cc;
-            color: black;
-        }
-        body.dark-theme .img-frame {
-            background: #001f24;
-            border: 4px solid #00ffff;
-            box-shadow: 0 0 35px #00ffff, 0 25px 35px -8px black;
-        }
-        body.dark-theme .img-caption {
-            background: rgba(0, 255, 255, 0.2);
-            color: #ffffff;
-            backdrop-filter: blur(6px);
-            border: 1px solid #ff99ff;
-            text-shadow: 0 0 6px #ff00c8;
-        }
-        body.dark-theme .footer-note {
-            background: #0a1a20;
-            color: #e6ffff;
-            border: 1px solid #00ffff;
-            box-shadow: 0 0 22px #00b3b3;
-        }
-        body.dark-theme .copyright {
-            color: #b3ffff;
-        }
-        body.dark-theme .hero-text > div[style*="background: #fff4e0"] {
-            background: #0f1e24 !important;
-            border: 1px solid #ff66cc;
-            box-shadow: 0 0 25px #ff00aa50;
-            color: #f0ffff;
-        }
-        body.dark-theme .hero-text > div span {
-            color: #ffccff !important;
-            text-shadow: 0 0 6px #ff00aa;
-        }
-        /* stats boxes */
-        body.dark-theme div[style*="background: white; padding: 30px; border-radius: 30px;"] {
-            background: #0a1a1f !important;
-            border: 1px solid #00ffff80;
-            box-shadow: 0 0 28px #00b3b340;
-        }
-        body.dark-theme div[style*="background: white; padding: 30px; border-radius: 30px;"] h3 {
-            color: #ffccff;
-            text-shadow: 0 0 10px #ff33cc, 0 0 5px #ff00aa;
-        }
-        body.dark-theme div[style*="background: white; padding: 30px; border-radius: 30px;"] p {
-            color: #ccffff;
-        }
-        body.dark-theme .realname-em {
-            background: #ff33cc !important;
-            box-shadow: 0 0 18px #ff00c8;
-            color: black;
-            font-weight: 700;
-        }
-
-        /* responsive */
-        @media (max-width: 800px) {
-            .hero {
-                flex-direction: column-reverse;
-            }
-            .nav-links a {
-                margin-left: 18px;
-            }
-            .logo {
-                font-size: 1.5rem;
-            }
-        }
-        @media (max-width: 550px) {
-            nav {
-                flex-direction: column;
-                gap: 16px;
-            }
-            .nav-right {
-                width: 100%;
-                justify-content: space-between;
-            }
-            .nav-links a {
-                margin: 0 10px;
-            }
+        /* Responsive */
+        @media (max-width: 850px) {
+            .hero-wrapper { flex-direction: column-reverse; text-align: center; }
+            .tagline { border-left: none; border-top: 3px solid var(--accent); padding: 1rem 0 0; margin: 0 auto; }
+            .hero-image-container { flex: 0 0 250px; }
+            .img-frame { width: 240px; height: 240px; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    Alven<span>Alex</span>
-                    <span class="real-small">‹ Pradeep Gupta  ›</span>
-                </div>
-                <div class="nav-right">
-                    <div class="nav-links">
-                        <a href="#home">Home</a>
-                        <a href="#skills">Expertise</a>
-                        <a href="#work">Skills</a>
-                        <a href="#contact">Contact</a>
-                        <a href="https://mryash-ftp.github.io/Web-Projects/project1/">Alven Library</a>
-                    </div>
-                    <!-- 🌓 NEON THEME TOGGLE BUTTON -->
-                    <button id="themeToggle" class="theme-toggle" aria-label="Switch between light and neon dark mode">
-                        <i class="fas fa-sun light-icon"></i>
-                        <i class="fas fa-moon dark-icon"></i>
-                    </button>
-                </div>
-            </nav>
-        </div>
-    </header>
 
-    <main>
-        <!-- HERO SECTION : HOME with IMAGE content -->
-        <div id="home" class="container">
-            <div class="hero">
+    <div class="container">
+        <nav>
+            <div class="logo">ALVEN <span> ALEX </span></div>
+            <div class="nav-right">
+                <a href="https://mryash-ftp.github.io/Web-Projects/project1/" target="_blank">Alven Library</a>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-wrapper">
                 <div class="hero-text">
-                    <span class="greet"><i class="fas fa-asterisk" style="color: #007a93; font-size: 0.9rem;"></i> PRADEEP KUMAR GUPTA</span>
-                    <h1>Data <span>Analysis</span> · Python <br> & Front-End <span>Web</span></h1>
-                    <div class="alias-badge">
-                        <i class="fas fa-id-card"></i> known as <strong>Alven Alex</strong> — my signature
-                    </div>
-                    <p class="hero-desc">
-    <i class="fas fa-map-pin" style="color: #005f73;"></i> 
-    Focused on data automation, structured analysis, and responsive web development.
-</p>
-
-                    <div class="btn-group">
-                        <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Hire me</a>
-                        <a href="#work" class="btn btn-outline"><i class="fas fa-code"></i> View work</a>
-                    </div>
-                    <!-- Real name clearly displayed -->
-                    <div style="margin-top: 28px; font-size: 1.05rem; background: #fff4e0; padding: 10px 22px; border-radius: 40px; display: inline-block; transition: all 0.2s;">
-                        <span style="font-weight: 700; color: #003f4f;"><i class="fa-regular fa-circle-user"></i> legal: Pradeep Kumar Gupta</span> — 
-                        <span style="color: #1e5f6b;"><i class="fa-regular fa-pen-to-square"></i> prefer Alven Alex</span>
-                    </div>
+                    <div class="subhead">PRADEEP • 19 • INDIA 🇮🇳</div>
+                    <h1>Logic in Code <span class="highlight">& </span> Magic in <span class="highlight">Design.</span></h1>
+                    <p class="tagline">Aspiring Tech Innovator | AI & Automation Enthusiast. Building smarter tools with <strong>Human + AI</strong> collaboration.</p>
                 </div>
-
-                <!-- YOUR IMAGE CONTENT (ADD YOUR IMAGE HERE) -->
-                <div class="hero-image">
+                
+                <div class="hero-image-container">
                     <div class="img-frame">
-                        <!-- ⬇️ REPLACE src WITH YOUR IMAGE PATH / URL -->
-                        <img src="https://i.ibb.co/QvsnjRtX/My-pic.jpg" alt="Pradeep Kumar Gupta (Alven Alex) - portfolio photo">
+                        <img src="https://i.ibb.co/QvsnjRtX/My-pic.jpg" alt="Alven Alex">
                     </div>
-                    <div class="img-caption">
-                        <i class="fa-regular fa-circle-check"></i> Pradeep · Alven Alex
-                    </div>
-                    <p style="font-size: 0.8rem; margin-top: 10px; color: #3f6872;"><i class="fa-solid fa-camera"></i> (my recent photo)</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- IDENTITY BLOCK : real name + surname emphasis -->
-        <div class="container">
-            <div class="identity-highlight">
-                <div>
-                    <h4><i class="fas fa-id-badge" style="color: #00748b;"></i> Pradeep Kumar Gupta</h4>
-                    <p style="color: #1a4e5a;"><span class="realname-em" style="background: #00748b; padding: 3px 14px; border-radius: 30px; color: white;">Alven Alex</span> — I use this alias everywhere, but my roots stay with real name. Both identities, same dedication.</p>
-                </div>
-                <div style="font-size: 2.5rem; color: #00748b; padding-right: 20px;">
-                    <i class="fas fa-equals"></i>
-                </div>
-            </div>
-        </div>
-
-        <!-- SKILLS / EXPERTISE : Data Analysis • Python • Frontend Development -->
-        <section id="skills" id="work">
-            <div class="container" id="work">
-                <h2 class="section-title">Core arsenal</h2>
-                <div class="expertise-grid">
-                    <div class="card">
-                        <i class="fas fa-database"></i>
-                        <h3>Data Analysis & Entry</h3>
-<p>
-Focused on data automation, structured analysis, and responsive web development.
-</p>
-<div class="badge-list">
-    <span class="badge">Excel</span>
-    <span class="badge">Power Query</span>
-    <span class="badge">Data Cleaning</span>
-</div>
-
-                    </div>
-                    <div class="card">
-                        <i class="fab fa-python"></i>
-                        <h3>Python</h3>
-                        <p>Automation scripts, data processing (pandas), Django basics, API integration, and web scraping with BeautifulSoup.</p>
-                        <div class="badge-list">
-                            <span class="badge">pandas</span>
-                            <span class="badge">Flask</span>
-                            <span class="badge">Selenium</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <i class="fas fa-laptop-code"></i>
-                        <h3>Front-End</h3>
-                        <p>Responsive HTML5, CSS3, Tailwind, JavaScript (ES6). Pixel-perfect from Figma. Portfolio & business sites.</p>
-                        <div class="badge-list">
-                            <span class="badge">React (basic)</span>
-                            <span class="badge">Bootstrap</span>
-                            <span class="badge">UI/UX sense</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-                </div>
-                <!-- extra content block -->
-                <div class="extra-row">
-                    <div class="extra-col">
-                        <i class="fas fa-keyboard"></i>
-                        <h5>45-50 WPM</h5>
-                        <p style="color: #1c5a64;">Practicing structured data workflows and improving speed with consistent accuracy.
-</p>
-                    </div>
-                    <div class="extra-col">
-                        <i class="fas fa-code-branch"></i>
-                        <h5>Pythonic</h5>
-                        <p style="color: #1c5a64;">Scripts that cut manual work — I love Boring stuff automation.</p>
-                    </div>
-                    <div class="extra-col">
-                        <i class="fas fa-paint-brush"></i>
-                        <h5>Front-end</h5>
-                        <p style="color: #1c5a64;">Semantic HTML, custom CSS, Tailwind. Mobile-first approach.</p>
-                    </div>
-                    <div class="extra-col">
-                        <i class="fas fa-user-check"></i>
-                        <h5>Alven Alex</h5>
-                        <p style="color: #1c5a64;">The creative alter ego – Pradeep Kumar Gupta’s professional face.</p>
-                    </div>
+                    <div class="glow-circle"></div>
                 </div>
             </div>
         </section>
 
-        <!-- MORE CONTENT – stats / attributes -->
-       <div style="background: white; padding: 30px; border-radius: 30px; flex: 1 1 260px;">
-    <h3>Career Focus</h3>
-    <p>Entry-level Data Analyst · Automation Enthusiast · Front-End Developer</p>
-</div>
-
-<div style="background: white; padding: 30px; border-radius: 30px; flex: 1 1 260px;">
-    <h3>Learning Path</h3>
-    <p>Advanced Excel · Python Pandas · Power BI · Real-world automation systems</p>
-</div>
-
-<div style="background: white; padding: 30px; border-radius: 30px; flex: 1 1 260px;">
-    <h3>Availability</h3>
-    <p>Remote internships · Entry-level roles · Freelance automation tasks</p>
-</div>
-
-
-        <!-- CONTACT & FOOTER -->
-        <div id="contact" class="container" style="margin-bottom: 60px;">
-            <div class="contact-area">
-                <div class="contact-flex">
-                    <div>
-                        <h2>Pradeep Kumar Gupta <small style="display:block; font-size:1rem; opacity:0.9;">aka Alven Alex</small></h2>
-                        <p style="font-size: 1.2rem; margin-top: 16px; opacity: 0.9; max-width: 500px;">
-                            <i class="fas fa-envelope"></i> mryashftp@gmail.com
-                            <i class="fas fa-phone-alt"></i> +91 97959 41891
-                        </p>
-                        <p style="margin-top: 20px;">
-                            <span style="background: #247c8a; padding: 8px 22px; border-radius: 40px; color: white; font-weight: 600;"><i class="fa-regular fa-id-card"></i> legal name: Pradeep Kumar Gupta — I always respond to Alven Alex</span>
-                        </p>
-                    </div>
-                    <div class="social-links">
-                        <a href="https://github.com/mryash-ftp" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href=https://www.linkedin.com/in/pradeep-alven-dev/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                          <a href="https://www.instagram.com/mryashftp/?igsh=dzlvNmltY3lyeW53&utm_source=ig_contact_invite#" target="_blank"><i class="fab fa-instagram"></i></a>
-                          <a href="mailto:mryashftp@gmail.com " target="_blank"><i class="fa-regular  fa-envelope"  ></i></a>
-                    </div>
-                </div>
-                <hr style="background: #61a5b2; margin: 40px 0 20px; border:0; height:1px;">
-                <div style="display: flex; justify-content: space-between; flex-wrap: wrap; color: #c1e3e9;">
-                    <span><i class="fa-regular fa-copyright"></i> 2025 Pradeep Kumar Gupta (Alven Alex) – Data/Code/Design</span>
-                    <span><i class="fas fa-heart" style="color: #ffb4b4;"></i> built with front-end craft</span>
-                </div>
+        <h2 class="section-header"><i class="fa-solid fa-layer-group"></i> Currently Building</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fa-brands fa-python"></i>
+                <h3>Python</h3>
+                <p>Mastering logic and automation for professional workflows.</p>
+                <p>I maked some  <span  ><a href="https://mryash-ftp.github.io/Web-Projects/project1/">Pojects</a> See</span></p>
             </div>
-            <div style="margin-top:30px; font-size:1.1rem; color:#1e5f6b;">
-    Bachelor of Arts graduate with growing specialization in data automation and analytics.
-    Focused on building an international-ready professional profile.
-</div>
-
-        </div>
-        
-        <!-- footer note real name -->
-        <div class="container copyright">
-            <div class="footer-note">
-                <i class="fa-regular fa-id-card"></i> I am <strong>Pradeep Kumar Gupta</strong> — but you'll find me everywhere as <strong style="background: #0f4b5c; color: white; padding: 4px 15px; border-radius: 50px;"> Alven Alex</strong>  •  data analysis  + python + front-end
+            <div class="card">
+                <i class="fa-solid fa-code"></i>
+                <h3>Web Dev</h3>
+                <p>HTML, CSS Creating interactive user experiences.</p>
+                <p>JavaScript Learning </p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>AI + Security</h3>
+                <p>Exploring AI-driven investigation tools like Alvenx.</p>
+                <p>Just for Alvens os futuristic windows</p>
             </div>
         </div>
-    </main>
+
+        <h2 class="section-header"><i class="fa-solid fa-map-location-dot"></i> 2026 Roadmap</h2>
+        <div class="roadmap" id="roadmap">
+            </div>
+
+        <h2 class="section-header"><i class="fa-solid fa-paper-plane"></i> Connect</h2>
+        <div class="contact-grid">
+            <a href="mailto:mryashftp@gmail.com" class="contact-card">
+                <i class="fa-regular fa-envelope"></i>
+                <div><strong>Email</strong><p style="font-size: 0.7rem; opacity: 0.6;">mryashftp@gmail.com</p></div>
+            </a>
+            <a href="https://linkedin.com/in/alvenalex" target="_blank" class="contact-card">
+                <i class="fa-brands fa-linkedin-in"></i>
+                <div><strong>LinkedIn</strong><p style="font-size: 0.7rem; opacity: 0.6;">/in/alvenalex</p></div>
+            </a>
+            <a href="https://github.com/mryash-ftp" target="_blank" class="contact-card">
+                <i class="fa-brands fa-github"></i>
+                <div><strong>GitHub</strong><p style="font-size: 0.7rem; opacity: 0.6;">mryash-ftp</p></div>
+            </a>
+            <a href="tel:+919795941891" class="contact-card">
+                <i class="fa-solid fa-phone"></i>
+                <div><strong>WhatsApp</strong><p style="font-size: 0.7rem; opacity: 0.6;">+91 9795941891</p></div>
+            </a>
+        </div>
+
+        <footer>
+            PRADEEP KUMAR GUPTA (ALVEN ALEX) &copy; 2026<br>
+            Building for MEXT 2027 • Japan 🇯🇵 Dream
+        </footer>
+    </div>
 
     <script>
-        (function() {
-            // ---------- NEON DARK THEME TOGGLE ----------
-            const themeToggle = document.getElementById('themeToggle');
-            const body = document.body;
-            const workSection = document.getElementById('work');
-            
-            // check for saved theme preference
-            const savedTheme = localStorage.getItem('portfolioTheme');
-            if (savedTheme === 'dark') {
-                body.classList.add('dark-theme');
-            } else {
-                body.classList.remove('dark-theme');
-            }
+        // Theme Toggle Logic
+        const btn = document.getElementById('themeToggle');
+        const icon = btn.querySelector('i');
+        const body = document.body;
 
-            // toggle theme function
-            function toggleTheme() {
-                body.classList.toggle('dark-theme');
-                // store preference
-                if (body.classList.contains('dark-theme')) {
-                    localStorage.setItem('portfolioTheme', 'dark');
-                } else {
-                    localStorage.setItem('portfolioTheme', 'light');
-                }
-                // adjust work section background
-                if (workSection) {
-                    if (body.classList.contains('dark-theme')) {
-                        workSection.style.background = '#030e12';
-                    } else {
-                        workSection.style.background = '#f2f8fa';
-                    }
-                }
-            }
+        btn.addEventListener('click', () => {
+            body.classList.toggle('light-theme');
+            const isLight = body.classList.contains('light-theme');
+            icon.className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            localStorage.setItem('mode', isLight ? 'light' : 'dark');
+        });
 
-            themeToggle.addEventListener('click', toggleTheme);
-            
-            // initial work section sync
-            if (workSection) {
-                if (body.classList.contains('dark-theme')) {
-                    workSection.style.background = '#030e12';
-                } else {
-                    workSection.style.background = '#f2f8fa';
-                }
-            }
+        if (localStorage.getItem('mode') === 'light') {
+            body.classList.add('light-theme');
+            icon.className = 'fa-solid fa-sun';
+        }
 
-            // update copyright year
-            const year = new Date().getFullYear();
-            const copyrightSpan = document.querySelector('.contact-area hr + div span:first-child');
-            if (copyrightSpan) {
-                copyrightSpan.innerHTML = `<i class="fa-regular fa-copyright"></i> ${year} Pradeep Kumar Gupta (Alven Alex) – Data/Code/Design`;
-            }
-        })();
+        // Roadmap Data
+        const roadmapData = [
+            { title: 'Complete O-Level (M3 & M4)', status: 'IN PROGRESS', progress: 25, color: '#00f2ff' },
+            { title: 'Build AI-based "Investigation Bin"', status: 'IDEA PHASE', progress: 10, color: '#ff00c8' },
+            { title: 'JLPT N5/N4 Proficiency (Japan 🇯🇵)', status: 'STARTING SOON', progress: 3, color: '#00f2ff' },
+            { title: 'Master Python Data Structures', status: 'LEARNING', progress: 5, color: '#ff00c8' }
+        ];
+
+        const roadmapContainer = document.getElementById('roadmap');
+        roadmapData.forEach(item => {
+            roadmapContainer.innerHTML += `
+                <div class="roadmap-item">
+                    <div class="roadmap-header">
+                        <div class="roadmap-title"><span>${item.title}</span></div>
+                        <div style="font-size: 0.8rem; display: flex; align-items:center; gap: 8px;">
+                            <span style="color:${item.color}; font-weight:700">${item.progress}%</span>
+                            <span class="status-badge" style="background:${item.color}20; color:${item.color}">${item.status}</span>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: ${item.progress}%"></div>
+                    </div>
+                </div>
+            `;
+        });
     </script>
-
-    <!-- extra style overrides for neon dark text -->
-    <style>
-        body.dark-theme .extra-row p,
-        body.dark-theme .extra-col p {
-            color: #ccffff !important;
-            text-shadow: 0 0 4px #0099bb;
-        }
-        body.dark-theme .extra-col h5 {
-            color: #ffffff;
-            text-shadow: 0 0 10px #00ffff, 0 0 5px #ff00c8;
-        }
-        body.dark-theme .identity-highlight .realname-em {
-            background: #ff33cc !important;
-            color: #000 !important;
-            text-shadow: 0 0 8px white;
-        }
-    </style>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
