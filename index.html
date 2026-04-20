@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alven Alex | Building Future</title>
+    <title>Alven Alex | Innovating the Future</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -14,7 +14,7 @@
             --accent: #00f2ff;
             --accent-2: #ff00c8;
             --border: rgba(255, 255, 255, 0.08);
-            --glass: blur(12px);
+            --glass: blur(15px);
             --progress-bg: rgba(255, 255, 255, 0.1);
         }
 
@@ -41,13 +41,12 @@
 
         .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
 
-        /* Navbar */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 0;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
         }
 
         .logo { 
@@ -55,22 +54,9 @@
             font-weight: 800; 
             font-size: 1.5rem; 
             text-transform: uppercase;
-            letter-spacing: -1px;
         }
 
         .logo span { color: var(--accent); text-shadow: 0 0 15px var(--accent); }
-
-        .nav-right { display: flex; align-items: center; gap: 1.5rem; }
-        
-        .nav-right a {
-            text-decoration: none;
-            color: var(--text);
-            font-size: 0.9rem;
-            font-weight: 600;
-            opacity: 0.7;
-            transition: 0.3s;
-        }
-        .nav-right a:hover { opacity: 1; color: var(--accent); }
 
         .theme-toggle {
             background: var(--card);
@@ -80,14 +66,10 @@
             border-radius: 12px;
             cursor: pointer;
             display: flex; align-items: center; justify-content: center;
-            transition: 0.3s;
         }
 
-        .theme-toggle:hover { border-color: var(--accent); transform: rotate(15deg); }
-
-        /* Hero Section */
-        .hero { margin-bottom: 5rem; }
-        
+        /* Hero Section with Photo */
+        .hero { margin-bottom: 4rem; }
         .hero-wrapper {
             display: flex;
             align-items: center;
@@ -101,13 +83,10 @@
             font-size: clamp(2.5rem, 6vw, 3.5rem); 
             margin-bottom: 1rem; 
             letter-spacing: -2px; 
-            line-height: 1.1;
             font-family: 'Poppins', sans-serif;
         }
 
-        .highlight { color: var(--accent-2); text-shadow: 0 0 20px rgba(255, 0, 200, 0.3); }
-
-        .subhead { font-size: 1rem; opacity: 0.6; margin-bottom: 1.5rem; font-weight: 600; letter-spacing: 1px; }
+        .highlight { color: var(--accent-2); }
 
         .tagline { 
             font-size: 1.1rem; 
@@ -117,7 +96,7 @@
             padding-left: 1.5rem;
         }
 
-        /* Profile Image Blob Style */
+        /* Photo Frame Style */
         .hero-image-container {
             flex: 0 0 300px;
             position: relative;
@@ -136,7 +115,7 @@
             justify-content: center;
             padding: 4px;
             box-shadow: 0 25px 50px -12px rgba(0, 242, 255, 0.3);
-            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: 0.5s;
             position: relative;
             z-index: 2;
         }
@@ -163,21 +142,31 @@
             pointer-events: none;
         }
 
-        /* Grid & Cards */
+        /* GitHub Stats Wrap */
+        .github-stats {
+            margin: 3rem 0;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: var(--glass);
+        }
+
+        .github-stats img { max-width: 100%; border-radius: 12px; }
+
         .section-header {
             font-size: 1.5rem;
             font-family: 'Poppins', sans-serif;
-            margin: 4rem 0 2rem;
+            margin: 3rem 0 1.5rem;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .section-header i { color: var(--accent); }
-
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
             gap: 1.5rem; 
         }
 
@@ -190,67 +179,32 @@
             transition: 0.4s;
         }
 
-        .card:hover { 
-            transform: translateY(-10px); 
-            border-color: var(--accent); 
-            box-shadow: 0 20px 40px -20px rgba(0, 242, 255, 0.2);
-        }
+        .card:hover { transform: translateY(-10px); border-color: var(--accent); }
+        .card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; display: block; }
 
-        .card i { font-size: 2rem; color: var(--accent); margin-bottom: 1.2rem; display: block; }
-        .card h3 { font-size: 1.2rem; margin-bottom: 0.8rem; }
-        .card p { font-size: 0.9rem; opacity: 0.6; }
-
-        /* Roadmap */
         .roadmap {
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 24px;
-            padding: 1.5rem;
+            padding: 2rem;
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .roadmap-item { width: 100%; }
-
-        .roadmap-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 0.8rem;
-        }
-
-        .roadmap-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 600;
-        }
-
-        .status-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 800;
-            font-size: 0.7rem;
-            letter-spacing: 0.5px;
+            gap: 1.5rem;
         }
 
         .progress-container {
-            width: 100%;
-            height: 4px;
+            width: 100%; height: 6px;
             background: var(--progress-bg);
-            border-radius: 20px;
+            border-radius: 10px;
             overflow: hidden;
         }
 
         .progress-bar {
             height: 100%;
             background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            width: 0%;
-            transition: width 1s ease-in-out;
+            transition: 1s;
         }
 
-        /* Contact Grid */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -259,35 +213,30 @@
 
         .contact-card {
             background: var(--card);
-            border: 1px solid var(--border);
             padding: 1.2rem;
-            border-radius: 20px;
+            border-radius: 15px;
             text-decoration: none;
             color: inherit;
             display: flex;
             align-items: center;
             gap: 1rem;
+            border: 1px solid var(--border);
             transition: 0.3s;
         }
 
         .contact-card:hover { border-color: var(--accent-2); background: rgba(255, 0, 200, 0.05); }
-        .contact-card i { font-size: 1.2rem; color: var(--accent-2); }
 
         footer { 
-            margin-top: 6rem; 
-            padding: 2rem 0; 
-            border-top: 1px solid var(--border); 
-            font-size: 0.8rem; 
-            opacity: 0.6;
+            margin-top: 4rem; 
+            padding: 2rem; 
             text-align: center;
+            opacity: 0.6;
+            font-size: 0.8rem;
         }
 
-        /* Responsive */
         @media (max-width: 850px) {
             .hero-wrapper { flex-direction: column-reverse; text-align: center; }
-            .tagline { border-left: none; border-top: 3px solid var(--accent); padding: 1rem 0 0; margin: 0 auto; }
-            .hero-image-container { flex: 0 0 250px; }
-            .img-frame { width: 240px; height: 240px; }
+            .tagline { border-left: none; border-top: 3px solid var(--accent); padding: 1rem 0 0; }
         }
     </style>
 </head>
@@ -297,19 +246,16 @@
         <nav>
             <div class="logo">ALVEN <span> ALEX </span></div>
             <div class="nav-right">
-                <a href="https://mryash-ftp.github.io/Web-Projects/project1/" target="_blank">Alven Library</a>
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fa-solid fa-moon"></i>
-                </button>
+                <button class="theme-toggle" id="themeToggle"><i class="fa-solid fa-moon"></i></button>
             </div>
         </nav>
 
         <section class="hero">
             <div class="hero-wrapper">
                 <div class="hero-text">
-                    <div class="subhead">PRADEEP • 19 • INDIA 🇮🇳</div>
+                    <div style="font-weight: 800; color: var(--accent); margin-bottom: 0.5rem; letter-spacing: 1px;">PRADEEP • 19 • INDIA 🇮🇳</div>
                     <h1>Logic in Code <span class="highlight">& </span> Magic in <span class="highlight">Design.</span></h1>
-                    <p class="tagline">Aspiring Tech Innovator | AI & Automation Enthusiast. Building smarter tools with <strong>Human + AI</strong> collaboration.</p>
+                    <p class="tagline">Aspiring Tech Innovator | AI & Automation Enthusiast. <br><strong>Building for MEXT 2027 • Japan Dream 🇯🇵</strong></p>
                 </div>
                 
                 <div class="hero-image-container">
@@ -321,100 +267,88 @@
             </div>
         </section>
 
-        <h2 class="section-header"><i class="fa-solid fa-layer-group"></i> Currently Building</h2>
+        <div class="github-stats">
+            <h3 style="margin-bottom: 1rem; font-size: 1rem; opacity: 0.7;">Development Activity</h3>
+            <img src="https://github-readme-stats.vercel.app/api?username=mryash-ftp&show_icons=true&theme=tokyonight&hide_border=true&bg_color=03081600" alt="Alven's GitHub Stats">
+        </div>
+
+        <h2 class="section-header"><i class="fa-solid fa-rocket"></i> Key Projects</h2>
         <div class="grid">
             <div class="card">
                 <i class="fa-brands fa-python"></i>
-                <h3>Python</h3>
-                <p>Mastering logic and automation for professional workflows.</p>
-                <p>I maked some  <span  ><a href="https://mryash-ftp.github.io/Web-Projects/project1/">Pojects</a> See</span></p>
-            </div>
-            <div class="card">
-                <i class="fa-solid fa-code"></i>
-                <h3>Web Dev</h3>
-                <p>HTML, CSS Creating interactive user experiences.</p>
-                <p>JavaScript Learning </p>
+                <h3>Python Innovations</h3>
+                <p>Developing automated tools and mastering Python logic for advanced workflows.</p>
+                <a href="https://github.com/mryash-ftp/python-beginner-practice" style="color: var(--accent); text-decoration: none; font-weight: 700; font-size: 0.8rem;">VIEW PRACTICE REPO →</a>
             </div>
             <div class="card">
                 <i class="fa-solid fa-shield-halved"></i>
-                <h3>AI + Security</h3>
-                <p>Exploring AI-driven investigation tools like Alvenx.</p>
-                <p>Just for Alvens os futuristic windows</p>
+                <h3>Investigation Bin</h3>
+                <p>A futuristic AI-driven security concept built for intelligent file isolation.</p>
+                <a href="https://github.com/mryash-ftp/Japan-Vision/tree/main/Python/Dream_Project" style="color: var(--accent); text-decoration: none; font-weight: 700; font-size: 0.8rem;">EXPLORE LOGIC →</a>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-code"></i>
+                <h3>Responsive Web</h3>
+                <p>Building high-end user experiences with modern HTML5, CSS3, and JavaScript.</p>
             </div>
         </div>
 
         <h2 class="section-header"><i class="fa-solid fa-map-location-dot"></i> 2026 Roadmap</h2>
-        <div class="roadmap" id="roadmap">
-            </div>
+        <div class="roadmap" id="roadmap"></div>
 
         <h2 class="section-header"><i class="fa-solid fa-paper-plane"></i> Connect</h2>
         <div class="contact-grid">
             <a href="mailto:mryashftp@gmail.com" class="contact-card">
                 <i class="fa-regular fa-envelope"></i>
-                <div><strong>Email</strong><p style="font-size: 0.7rem; opacity: 0.6;">mryashftp@gmail.com</p></div>
-            </a>
-            <a href="https://linkedin.com/in/alvenalex" target="_blank" class="contact-card">
-                <i class="fa-brands fa-linkedin-in"></i>
-                <div><strong>LinkedIn</strong><p style="font-size: 0.7rem; opacity: 0.6;">/in/alvenalex</p></div>
+                <div><strong>Email</strong></div>
             </a>
             <a href="https://github.com/mryash-ftp" target="_blank" class="contact-card">
                 <i class="fa-brands fa-github"></i>
-                <div><strong>GitHub</strong><p style="font-size: 0.7rem; opacity: 0.6;">mryash-ftp</p></div>
+                <div><strong>GitHub</strong></div>
             </a>
-            <a href="tel:+919795941891" class="contact-card">
-                <i class="fa-solid fa-phone"></i>
-                <div><strong>WhatsApp</strong><p style="font-size: 0.7rem; opacity: 0.6;">+91 9795941891</p></div>
+            <a href="https://linkedin.com/in/alvenalex" target="_blank" class="contact-card">
+                <i class="fa-brands fa-linkedin-in"></i>
+                <div><strong>LinkedIn</strong></div>
             </a>
+	    <a href="https://wa.me/919795941891" target="blank" class="contact-card">
+        <i class="fa-brands fa-whatsapp"></i>
+        <div><strong>WhatsApp</strong><p style="font-size: 0.7rem; opacity: 0.5;">+91 9795941891</p></div>
+    </a>
         </div>
 
         <footer>
             PRADEEP KUMAR GUPTA (ALVEN ALEX) &copy; 2026<br>
-            Building for MEXT 2027 • Japan 🇯🇵 Dream
+            "Pursuing Excellence through Logic & AI"
         </footer>
     </div>
 
     <script>
-        // Theme Toggle Logic
         const btn = document.getElementById('themeToggle');
         const icon = btn.querySelector('i');
-        const body = document.body;
-
         btn.addEventListener('click', () => {
-            body.classList.toggle('light-theme');
-            const isLight = body.classList.contains('light-theme');
-            icon.className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-            localStorage.setItem('mode', isLight ? 'light' : 'dark');
+            document.body.classList.toggle('light-theme');
+            icon.className = document.body.classList.contains('light-theme') ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
         });
 
-        if (localStorage.getItem('mode') === 'light') {
-            body.classList.add('light-theme');
-            icon.className = 'fa-solid fa-sun';
-        }
-
-        // Roadmap Data
         const roadmapData = [
-            { title: 'Complete O-Level (M3 & M4)', status: 'IN PROGRESS', progress: 25, color: '#00f2ff' },
-            { title: 'Build AI-based "Investigation Bin"', status: 'IDEA PHASE', progress: 10, color: '#ff00c8' },
-            { title: 'JLPT N5/N4 Proficiency (Japan 🇯🇵)', status: 'STARTING SOON', progress: 3, color: '#00f2ff' },
-            { title: 'Master Python Data Structures', status: 'LEARNING', progress: 5, color: '#ff00c8' }
+            { title: 'O-Level Certification (M3 & M4)', status: '25%', color: '#00f2ff' },
+            { title: 'AI-based "Investigation Bin" Logic', status: '15%', color: '#ff00c8' },
+            { title: 'JLPT N5/N4 Language Proficiency', status: '5%', color: '#00f2ff' },
+            { title: 'Mastering Python Data Structures', status: '10%', color: '#ff00c8' }
         ];
 
         const roadmapContainer = document.getElementById('roadmap');
         roadmapData.forEach(item => {
             roadmapContainer.innerHTML += `
                 <div class="roadmap-item">
-                    <div class="roadmap-header">
-                        <div class="roadmap-title"><span>${item.title}</span></div>
-                        <div style="font-size: 0.8rem; display: flex; align-items:center; gap: 8px;">
-                            <span style="color:${item.color}; font-weight:700">${item.progress}%</span>
-                            <span class="status-badge" style="background:${item.color}20; color:${item.color}">${item.status}</span>
-                        </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight:600">${item.title}</span>
+                        <span style="color:${item.color}; font-weight:800">${item.status}</span>
                     </div>
                     <div class="progress-container">
-                        <div class="progress-bar" style="width: ${item.progress}%"></div>
+                        <div class="progress-bar" style="width: ${item.status}; background: ${item.color}"></div>
                     </div>
-                </div>
-            `;
+                </div>`;
         });
     </script>
 </body>
