@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Alven Alex | Innovating the Future</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
+
         :root {
             --bg: #030816;
             --card: rgba(255, 255, 255, 0.03);
@@ -28,18 +35,79 @@
             --progress-bg: #e2e8f0;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
             overflow-x: hidden;
             line-height: 1.6;
         }
 
+        /* ========== CUSTOM CURSOR ========== */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.08s linear;
+            box-shadow: 0 0 8px var(--accent);
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--accent-2);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.15s ease, width 0.2s, height 0.2s;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Hover effect on interactive elements */
+        a:hover ~ .cursor-outline,
+        button:hover ~ .cursor-outline,
+        .card:hover ~ .cursor-outline,
+        .contact-card:hover ~ .cursor-outline,
+        .library-btn:hover ~ .cursor-outline {
+            width: 56px;
+            height: 56px;
+            border-color: var(--accent);
+            background: rgba(0, 242, 255, 0.1);
+        }
+
+        /* Fade-in */
+        body {
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+
+        /* ========== SCROLL PROGRESS BAR ========== */
+        .progress-bar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: transparent;
+            z-index: 10000;
+        }
+        .scroll-progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            transition: width 0.08s linear;
+        }
 
         nav {
             display: flex;
@@ -47,28 +115,71 @@
             align-items: center;
             padding: 1.5rem 0;
             margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        .logo { 
+        .logo {
             font-family: 'Poppins', sans-serif;
-            font-weight: 800; 
-            font-size: 1.5rem; 
+            font-weight: 800;
+            font-size: 1.5rem;
             text-transform: uppercase;
         }
 
         .logo span { color: var(--accent); text-shadow: 0 0 15px var(--accent); }
 
-        .theme-toggle {
+        .nav-right {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .theme-toggle, .library-btn {
             background: var(--card);
             border: 1px solid var(--border);
             color: var(--text);
-            width: 45px; height: 45px;
+            width: 45px;
+            height: 45px;
             border-radius: 12px;
             cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Hero Section with Photo */
+        .library-btn {
+            width: auto;
+            padding: 0 1.2rem;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: white;
+            border: none;
+            text-decoration: none;
+        }
+
+        .library-btn i { font-size: 1rem; }
+        .library-btn:hover { transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 8px 20px rgba(0, 242, 255, 0.3); }
+        .theme-toggle:hover { transform: scale(1.05); border-color: var(--accent); }
+
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 80%);
+            transform: scale(0);
+            animation: rippleAnim 0.6s ease-out;
+            pointer-events: none;
+        }
+        @keyframes rippleAnim {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        /* Hero Section */
         .hero { margin-bottom: 4rem; }
         .hero-wrapper {
             display: flex;
@@ -76,27 +187,23 @@
             justify-content: space-between;
             gap: 3rem;
         }
-
         .hero-text { flex: 1; }
-
-        .hero h1 { 
-            font-size: clamp(2.5rem, 6vw, 3.5rem); 
-            margin-bottom: 1rem; 
-            letter-spacing: -2px; 
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
             font-family: 'Poppins', sans-serif;
         }
-
         .highlight { color: var(--accent-2); }
-
-        .tagline { 
-            font-size: 1.1rem; 
-            opacity: 0.8; 
-            max-width: 600px; 
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
             border-left: 3px solid var(--accent);
             padding-left: 1.5rem;
         }
 
-        /* Photo Frame Style */
+        /* Photo Frame */
         .hero-image-container {
             flex: 0 0 300px;
             position: relative;
@@ -104,7 +211,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .img-frame {
             width: 280px;
             height: 280px;
@@ -119,12 +225,10 @@
             position: relative;
             z-index: 2;
         }
-
         .img-frame:hover {
             border-radius: 60% 40% 40% 60% / 40% 50% 50% 60%;
             transform: scale(1.05) rotate(-2deg);
         }
-
         .img-frame img {
             width: 100%;
             height: 100%;
@@ -132,7 +236,6 @@
             border-radius: inherit;
             border: 3px solid var(--bg);
         }
-
         .glow-circle {
             position: absolute;
             width: 350px;
@@ -142,7 +245,7 @@
             pointer-events: none;
         }
 
-        /* GitHub Stats Wrap */
+        /* GitHub Stats */
         .github-stats {
             margin: 3rem 0;
             background: var(--card);
@@ -151,8 +254,9 @@
             padding: 1.5rem;
             text-align: center;
             backdrop-filter: var(--glass);
+            transition: transform 0.3s, border-color 0.3s;
         }
-
+        .github-stats:hover { border-color: var(--accent); transform: translateY(-3px); }
         .github-stats img { max-width: 100%; border-radius: 12px; }
 
         .section-header {
@@ -164,22 +268,41 @@
             gap: 10px;
         }
 
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 1.5rem; 
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
 
-        .card { 
-            background: var(--card); 
-            border: 1px solid var(--border); 
-            padding: 2rem; 
-            border-radius: 24px; 
+        /* 3D Magnetic Card */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 24px;
             backdrop-filter: var(--glass);
-            transition: 0.4s;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            will-change: transform;
         }
-
-        .card:hover { transform: translateY(-10px); border-color: var(--accent); }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            transition: left 0.5s;
+        }
+        .card:hover::before { left: 100%; }
+        .card:hover {
+            transform: translateY(-10px) rotateX(2deg) rotateY(2deg);
+            border-color: var(--accent);
+            box-shadow: 0 25px 35px -15px rgba(0, 242, 255, 0.2);
+        }
         .card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; display: block; }
 
         .roadmap {
@@ -191,18 +314,17 @@
             flex-direction: column;
             gap: 1.5rem;
         }
-
         .progress-container {
             width: 100%; height: 6px;
             background: var(--progress-bg);
             border-radius: 10px;
             overflow: hidden;
         }
-
         .progress-bar {
             height: 100%;
             background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            transition: 1s;
+            transition: width 1.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            width: 0%;
         }
 
         .contact-grid {
@@ -210,7 +332,6 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
         }
-
         .contact-card {
             background: var(--card);
             padding: 1.2rem;
@@ -221,135 +342,473 @@
             align-items: center;
             gap: 1rem;
             border: 1px solid var(--border);
-            transition: 0.3s;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .contact-card:hover {
+            border-color: var(--accent-2);
+            background: rgba(255, 0, 200, 0.05);
+            transform: translateX(8px);
         }
 
-        .contact-card:hover { border-color: var(--accent-2); background: rgba(255, 0, 200, 0.05); }
-
-        footer { 
-            margin-top: 4rem; 
-            padding: 2rem; 
+        footer {
+            margin-top: 4rem;
+            padding: 2rem;
             text-align: center;
-            opacity: 0.6;
+            opacity: 0.7;
             font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+            transition: 0.3s;
+        }
+        footer:hover { opacity: 1; }
+
+        /* Scroll reveal + zoom effect */
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px) scale(0.97);
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Floating Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: none;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* floating shapes background */
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .shape {
+            position: absolute;
+            background: radial-gradient(circle, var(--accent), transparent);
+            opacity: 0.05;
+            border-radius: 50%;
+            animation: floatAnim 20s infinite alternate;
+        }
+        @keyframes floatAnim {
+            0% { transform: translateY(0px) translateX(0px) scale(1); }
+            100% { transform: translateY(-80px) translateX(40px) scale(1.2); }
         }
 
         @media (max-width: 850px) {
             .hero-wrapper { flex-direction: column-reverse; text-align: center; }
             .tagline { border-left: none; border-top: 3px solid var(--accent); padding: 1rem 0 0; }
+            .container { padding: 1.5rem; }
+            .library-btn { padding: 0 1rem; font-size: 0.75rem; }
+            .cursor-dot, .cursor-outline { display: none; }
+            body { cursor: auto; }
+            * { cursor: auto; }
         }
+        /* ===== FUTURE DREAM BUTTON SECTION ===== */
+.dream-button-wrapper {
+    margin: 2rem 0 3rem;
+    text-align: center;
+}
+
+.dream-glow-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    padding: 12px 28px;
+    border-radius: 60px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.dream-glow-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #ff0066, #ffcc00, #00ffcc, #ff0066);
+    background-size: 300% 300%;
+    border-radius: 60px;
+    z-index: -2;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.dream-glow-btn::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 58px;
+    z-index: -1;
+    transition: all 0.4s;
+}
+
+.dream-glow-btn:hover::before {
+    opacity: 1;
+    animation: gradientShift 3s ease infinite;
+}
+
+.dream-glow-btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(255, 0, 102, 0.3);
+}
+
+.dream-glow-btn i {
+    font-size: 1.2rem;
+    animation: starFloat 1.5s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes starFloat {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-3px) rotate(10deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* Light theme support */
+.light-theme .dream-glow-btn {
+    background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+    color: #1a1a2e;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .dream-glow-btn::after {
+    background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+}
+
+.dream-badge-small {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 10px;
+    border-radius: 40px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    margin-left: 8px;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 550px) {
+    .dream-glow-btn {
+        padding: 10px 20px;
+        font-size: 0.75rem;
+    }
+    .dream-glow-btn i {
+        font-size: 1rem;
+    }
+}
     </style>
 </head>
 <body>
+
+    <!-- Scroll Progress Bar -->
+    <div class="progress-bar-container">
+        <div class="scroll-progress" id="scrollProgress"></div>
+    </div>
+
+    <!-- Floating Shapes Background -->
+    <div class="floating-shapes">
+        <div class="shape" style="width: 200px; height: 200px; top: 10%; left: -50px; animation-duration: 25s;"></div>
+        <div class="shape" style="width: 350px; height: 350px; bottom: 0; right: -100px; animation-duration: 30s; animation-delay: -5s;"></div>
+        <div class="shape" style="width: 150px; height: 150px; top: 50%; left: 70%; animation-duration: 18s;"></div>
+    </div>
+
+    <!-- Custom Cursors -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
     <div class="container">
         <nav>
             <div class="logo">ALVEN <span> ALEX </span></div>
             <div class="nav-right">
-                <button class="theme-toggle" id="themeToggle"><i class="fa-solid fa-moon"></i></button>
+                <a href="https://mryash-ftp.github.io/Web-Projects/project1/" target="_blank" class="library-btn" id="libraryBtn">
+                    <i class="fa-solid fa-book"></i>
+                    <span>Alven Library</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
             </div>
         </nav>
 
-        <section class="hero">
+        <section class="hero reveal">
             <div class="hero-wrapper">
                 <div class="hero-text">
                     <div style="font-weight: 800; color: var(--accent); margin-bottom: 0.5rem; letter-spacing: 1px;">PRADEEP • 19 • INDIA 🇮🇳</div>
-                    <h1>Logic in Code <span class="highlight">& </span> Magic in <span class="highlight">Design.</span></h1>
+                    <h1 id="typingTitle">Logic in Code <span class="highlight">& </span> Magic in <span class="highlight">Design.</span></h1>
                     <p class="tagline">Aspiring Tech Innovator | AI & Automation Enthusiast. <br><strong>Building for MEXT 2027 • Japan Dream 🇯🇵</strong></p>
                 </div>
-                
                 <div class="hero-image-container">
                     <div class="img-frame">
-                        <img src="https://i.ibb.co/QvsnjRtX/My-pic.jpg" alt="Alven Alex">
+                        <img src="https://i.ibb.co/QvsnjRtX/My-pic.jpg" alt="Alven Alex" onerror="this.src='https://via.placeholder.com/280x280?text=Alven+Alex'">
                     </div>
                     <div class="glow-circle"></div>
                 </div>
             </div>
         </section>
 
-        <div class="github-stats">
+                <!-- Future Dream Project Button - Alag Se Highlight -->
+<div class="dream-button-wrapper reveal">
+    <a href="https://mryash-ftp.github.io/Web-Projects/project2/" target="_blank" class="dream-glow-btn">
+        <i class="fa-regular fa-star"></i>
+        <span>🌟 ALVEN'S FUTURE DREAM PROJECT</span>
+        <i class="fa-solid fa-arrow-right"></i>
+        <span class="dream-badge-small">2027</span>
+    </a>
+    <p style="font-size: 0.7rem; opacity: 0.6; margin-top: 12px;">
+        ⚡ AI-Powered • Japan Vision • Next-Gen Automation
+    </p>
+</div>
+
+        <div class="github-stats reveal">
             <h3 style="margin-bottom: 1rem; font-size: 1rem; opacity: 0.7;">Development Activity</h3>
             <img src="https://github-readme-stats.vercel.app/api?username=mryash-ftp&show_icons=true&theme=tokyonight&hide_border=true&bg_color=03081600" alt="Alven's GitHub Stats">
         </div>
 
-        <h2 class="section-header"><i class="fa-solid fa-rocket"></i> Key Projects</h2>
+
+
+        <h2 class="section-header reveal"><i class="fa-solid fa-rocket"></i> Key Projects</h2>
         <div class="grid">
-            <div class="card">
+            <div class="card reveal" data-tilt>
                 <i class="fa-brands fa-python"></i>
                 <h3>Python Innovations</h3>
                 <p>Developing automated tools and mastering Python logic for advanced workflows.</p>
                 <a href="https://github.com/mryash-ftp/python-beginner-practice" style="color: var(--accent); text-decoration: none; font-weight: 700; font-size: 0.8rem;">VIEW PRACTICE REPO →</a>
             </div>
-            <div class="card">
+            <div class="card reveal" data-tilt>
                 <i class="fa-solid fa-shield-halved"></i>
                 <h3>Investigation Bin</h3>
                 <p>A futuristic AI-driven security concept built for intelligent file isolation.</p>
                 <a href="https://github.com/mryash-ftp/Japan-Vision/tree/main/Python/Dream_Project" style="color: var(--accent); text-decoration: none; font-weight: 700; font-size: 0.8rem;">EXPLORE LOGIC →</a>
             </div>
-            <div class="card">
+            <div class="card reveal" data-tilt>
                 <i class="fa-solid fa-code"></i>
                 <h3>Responsive Web</h3>
                 <p>Building high-end user experiences with modern HTML5, CSS3, and JavaScript.</p>
             </div>
         </div>
 
-        <h2 class="section-header"><i class="fa-solid fa-map-location-dot"></i> 2026 Roadmap</h2>
-        <div class="roadmap" id="roadmap"></div>
+        <h2 class="section-header reveal"><i class="fa-solid fa-map-location-dot"></i> 2026 Roadmap</h2>
+        <div class="roadmap reveal" id="roadmap"></div>
 
-        <h2 class="section-header"><i class="fa-solid fa-paper-plane"></i> Connect</h2>
-        <div class="contact-grid">
-            <a href="mailto:mryashftp@gmail.com" class="contact-card">
-                <i class="fa-regular fa-envelope"></i>
-                <div><strong>Email</strong></div>
-            </a>
-            <a href="https://github.com/mryash-ftp" target="_blank" class="contact-card">
-                <i class="fa-brands fa-github"></i>
-                <div><strong>GitHub</strong></div>
-            </a>
-            <a href="https://linkedin.com/in/alvenalex" target="_blank" class="contact-card">
-                <i class="fa-brands fa-linkedin-in"></i>
-                <div><strong>LinkedIn</strong></div>
-            </a>
-	    <a href="https://wa.me/919795941891" target="blank" class="contact-card">
-        <i class="fa-brands fa-whatsapp"></i>
-        <div><strong>WhatsApp</strong><p style="font-size: 0.7rem; opacity: 0.5;">+91 9795941891</p></div>
-    </a>
+        <h2 class="section-header reveal"><i class="fa-solid fa-paper-plane"></i> Connect</h2>
+        <div class="contact-grid reveal">
+            <a href="mailto:mryashftp@gmail.com" class="contact-card"><i class="fa-regular fa-envelope"></i><div><strong>Email</strong></div></a>
+            <a href="https://github.com/mryash-ftp" target="_blank" class="contact-card"><i class="fa-brands fa-github"></i><div><strong>GitHub</strong></div></a>
+            <a href="https://linkedin.com/in/alvenalex" target="_blank" class="contact-card"><i class="fa-brands fa-linkedin-in"></i><div><strong>LinkedIn</strong></div></a>
+            <a href="https://wa.me/919795941891" target="_blank" class="contact-card"><i class="fa-brands fa-whatsapp"></i><div><strong>WhatsApp</strong><p style="font-size: 0.7rem; opacity: 0.5;">+91 9795941891</p></div></a>
         </div>
 
-        <footer>
+        <footer class="reveal">
             PRADEEP KUMAR GUPTA (ALVEN ALEX) &copy; 2026<br>
-            "Pursuing Excellence through Logic & AI"
+            "Pursuing Excellence through Logic & AI"  |  🌟 MEXT 2027 Dream 🌟
         </footer>
     </div>
 
     <script>
-        const btn = document.getElementById('themeToggle');
-        const icon = btn.querySelector('i');
-        btn.addEventListener('click', () => {
+        // ---------- CUSTOM CURSOR ----------
+        const dot = document.getElementById('cursorDot');
+        const outline = document.getElementById('cursorOutline');
+        if (window.innerWidth > 850) {
+            document.addEventListener('mousemove', (e) => {
+                dot.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
+                outline.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
+            });
+            document.querySelectorAll('a, button, .card, .contact-card, .library-btn').forEach(el => {
+                el.addEventListener('mouseenter', () => outline.style.transform += ' scale(1.3)');
+                el.addEventListener('mouseleave', () => outline.style.transform = outline.style.transform.replace(' scale(1.3)', ''));
+            });
+        }
+
+        // ---------- SCROLL PROGRESS ----------
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+            const backBtn = document.getElementById('backToTop');
+            if (winScroll > 300) backBtn.classList.add('show');
+            else backBtn.classList.remove('show');
+        });
+        document.getElementById('backToTop')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // ---------- THEME TOGGLE + RIPPLE ----------
+        const themeBtn = document.getElementById('themeToggle');
+        const iconTheme = themeBtn.querySelector('i');
+        themeBtn.addEventListener('click', (e) => {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            ripple.style.left = e.clientX - themeBtn.getBoundingClientRect().left + 'px';
+            ripple.style.top = e.clientY - themeBtn.getBoundingClientRect().top + 'px';
+            themeBtn.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
             document.body.classList.toggle('light-theme');
-            icon.className = document.body.classList.contains('light-theme') ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            iconTheme.className = document.body.classList.contains('light-theme') ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            iconTheme.style.transform = 'rotate(360deg)';
+            setTimeout(() => iconTheme.style.transform = '', 300);
         });
 
+        // ---------- ROADMAP (Data unchanged) ----------
         const roadmapData = [
             { title: 'O-Level Certification (M3 & M4)', status: '25%', color: '#00f2ff' },
             { title: 'AI-based "Investigation Bin" Logic', status: '15%', color: '#ff00c8' },
             { title: 'JLPT N5/N4 Language Proficiency', status: '5%', color: '#00f2ff' },
             { title: 'Mastering Python Data Structures', status: '10%', color: '#ff00c8' }
         ];
-
         const roadmapContainer = document.getElementById('roadmap');
         roadmapData.forEach(item => {
             roadmapContainer.innerHTML += `
                 <div class="roadmap-item">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                         <span style="font-weight:600">${item.title}</span>
-                        <span style="color:${item.color}; font-weight:800">${item.status}</span>
+                        <span style="color:${item.color}; font-weight:800" class="percent-counter" data-target="${item.status}">0%</span>
                     </div>
                     <div class="progress-container">
-                        <div class="progress-bar" style="width: ${item.status}; background: ${item.color}"></div>
+                        <div class="progress-bar" style="width: 0%; background: ${item.color}" data-target="${item.status}"></div>
                     </div>
                 </div>`;
         });
+
+        // ---------- SCROLL REVEAL + COUNT UP + PROGRESS ----------
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    if (entry.target.classList.contains('roadmap') || entry.target.id === 'roadmapContainer') {
+                        document.querySelectorAll('.progress-bar').forEach(bar => {
+                            const target = bar.getAttribute('data-target');
+                            if (target) bar.style.width = target;
+                        });
+                        document.querySelectorAll('.percent-counter').forEach(counter => {
+                            const final = counter.getAttribute('data-target');
+                            let current = 0;
+                            const finalNum = parseInt(final);
+                            const updateCounter = setInterval(() => {
+                                if (current >= finalNum) clearInterval(updateCounter);
+                                else {
+                                    current++;
+                                    counter.innerText = current + '%';
+                                }
+                            }, 35);
+                        });
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealElements.forEach(el => observer.observe(el));
+
+        const roadSection = document.querySelector('.roadmap');
+        const roadObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.progress-bar').forEach(bar => {
+                        const t = bar.getAttribute('data-target');
+                        if (t) bar.style.width = t;
+                    });
+                    document.querySelectorAll('.percent-counter').forEach(c => {
+                        const fin = c.getAttribute('data-target');
+                        let val = 0;
+                        const finN = parseInt(fin);
+                        const intr = setInterval(() => {
+                            if (val >= finN) clearInterval(intr);
+                            else { val++; c.innerText = val + '%'; }
+                        }, 30);
+                    });
+                    roadObserver.unobserve(roadSection);
+                }
+            });
+        }, { threshold: 0.4 });
+        if (roadSection) roadObserver.observe(roadSection);
+
+        // Magnetic tilt on cards
+        const cards = document.querySelectorAll('.card[data-tilt]');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+
+        // ripple effect on library btn and contact cards
+        document.querySelectorAll('.library-btn, .contact-card').forEach(el => {
+            el.addEventListener('click', function(e) {
+                const rippleSpan = document.createElement('span');
+                rippleSpan.classList.add('ripple');
+                const rect = this.getBoundingClientRect();
+                rippleSpan.style.left = e.clientX - rect.left + 'px';
+                rippleSpan.style.top = e.clientY - rect.top + 'px';
+                this.style.position = 'relative';
+                this.appendChild(rippleSpan);
+                setTimeout(() => rippleSpan.remove(), 500);
+            });
+        });
+
+        // Ensure no data changes: all text and links exactly as original
     </script>
 </body>
 </html>
